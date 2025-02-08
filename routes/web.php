@@ -7,6 +7,13 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductAttributeController;
 use App\Http\Controllers\Admin\ProductDiscountController;
 use App\Http\Controllers\Admin\SubCategoryController;
+
+use App\Http\Controllers\Artist\ArtistMainController;
+use App\Http\Controllers\Artist\ArtistProductController;
+use App\Http\Controllers\Artist\ArtistStoreController;
+
+use App\Http\Controllers\Customer\CustomerMainController;
+
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,12 +21,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified', 'rolemanager:customer'])->name('dashboard');
-
 // admin routes
-
 Route::middleware(['auth', 'verified', 'rolemanager:admin'])->group(function () {
     Route::prefix('admin')->group(function(){
         Route::controller(AdminMainController::class)->group(function(){
@@ -63,9 +65,38 @@ Route::middleware(['auth', 'verified', 'rolemanager:admin'])->group(function () 
     });
 });
 
-Route::get('/artist/dashboard', function () {
-    return view('artist');
-})->middleware(['auth', 'verified', 'rolemanager:artist'])->name('artist');
+// Artist routes
+Route::middleware(['auth', 'verified', 'rolemanager:artist'])->group(function () {
+    Route::prefix('artist')->group(function(){
+        Route::controller(ArtistMainController::class)->group(function(){
+            Route::get('/dashboard', 'index')->name('artist');
+            Route::get('/order/history', 'orderhistory')->name('artist.order.history');            
+        });
+
+        Route::controller(ArtistProductController::class)->group(function(){
+            Route::get('/product/create', 'index')->name('artist.product');
+            Route::get('/product/manage', 'manage')->name('artist.product.manage');
+        });
+
+        Route::controller(ArtistStoreController::class)->group(function(){
+            Route::get('/store/create', 'index')->name('artist.store');
+            Route::get('/store/manage', 'manage')->name('artist.store.manage');
+        });
+    });
+});
+
+// Customer routes
+Route::middleware(['auth', 'verified', 'rolemanager:customer'])->group(function () {
+    Route::prefix('user')->group(function(){
+        Route::controller(CustomerMainController::class)->group(function(){
+            Route::get('/dashboard', 'index')->name('dashboard');
+            Route::get('/order/history', 'history')->name('customer.history');
+            Route::get('/setting/payment', 'payment')->name('customer.payment');
+            Route::get('/affiliate', 'affiliate')->name('customer.affiliate');
+        });
+    });
+});
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
