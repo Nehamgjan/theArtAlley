@@ -15,7 +15,7 @@
 
     <link rel="canonical" href="https://demo-basic.adminkit.io/pages-blank.html" />
 
-    <title>@yield('admin_page_title')</title>
+    <title>@yield('artist_page_title')</title>
 
     <link href="{{asset('admin_asset/css/app.css')}}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -34,8 +34,8 @@
                         Main
                     </li>
 
-                    <li class="sidebar-item {{request()->routeIs('admin')?'active':''}}">
-                        <a class="sidebar-link" href="{{route('admin')}}">
+                    <li class="sidebar-item {{request()->routeIs('artist')?'active':''}}">
+                        <a class="sidebar-link" href="{{route('artist')}}">
                             <i class="align-middle" data-feather="activity"></i> <span
                                 class="align-middle">Dashboard</span>
                         </a>
@@ -45,175 +45,50 @@
                         <a data-bs-toggle="collapse" class="sidebar-link" href="#categoryMenu" role="button"
                             aria-expanded="{{ request()->routeIs('category.*') ? 'true' : 'false' }}"
                             aria-controls="categoryMenu">
-                            <i class="align-middle" data-feather="grid"></i> <span class="align-middle">Category</span>
+                            <i class="align-middle" data-feather="package"></i> <span class="align-middle">Product</span>
                         </a>
                         <ul id="categoryMenu"
                             class="sidebar-dropdown list-unstyled collapse {{ request()->routeIs('category.*') ? 'show' : '' }}">
-                            <li class="sidebar-item {{ request()->routeIs('category.create') ? 'active' : '' }}">
-                                <a class="sidebar-link" href="{{ route('category.create') }}">
-                                    <i class="align-middle" data-feather="plus"></i> <span class="align-middle">Create
-                                        Category</span>
+                            <li class="sidebar-item {{ request()->routeIs('artist.product') ? 'active' : '' }}">
+                                <a class="sidebar-link" href="{{ route('artist.product') }}">
+                                    <i class="align-middle" data-feather="plus"></i> <span
+                                        class="align-middle">Create</span>
                                 </a>
                             </li>
-                            <li class="sidebar-item {{ request()->routeIs('category.manage') ? 'active' : '' }}">
-                                <a class="sidebar-link" href="{{ route('category.manage') }}">
-                                    <i class="align-middle" data-feather="list"></i> <span class="align-middle">Manage
-                                        Category</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="sidebar-item {{ request()->routeIs('subcategory.*') ? 'active' : '' }}">
-                        <a data-bs-toggle="collapse" class="sidebar-link" href="#subCategoryMenu" role="button"
-                            aria-expanded="{{ request()->routeIs('subcategory.*') ? 'true' : 'false' }}"
-                            aria-controls="subCategoryMenu">
-                            <i class="align-middle" data-feather="layers"></i> <span class="align-middle">Sub
-                                Category</span>
-                        </a>
-                        <ul id="subCategoryMenu"
-                            class="sidebar-dropdown list-unstyled collapse {{ request()->routeIs('subcategory.*') ? 'show' : '' }}">
-                            <li class="sidebar-item {{ request()->routeIs('subcategory.create') ? 'active' : '' }}">
-                                <a class="sidebar-link" href="{{ route('subcategory.create') }}">
-                                    <i class="align-middle" data-feather="plus"></i> <span class="align-middle">Create
-                                        Sub Category</span>
-                                </a>
-                            </li>
-                            <li class="sidebar-item {{ request()->routeIs('subcategory.manage') ? 'active' : '' }}">
-                                <a class="sidebar-link" href="{{ route('subcategory.manage') }}">
-                                    <i class="align-middle" data-feather="list"></i> <span class="align-middle">Manage
-                                        Sub Category</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li
-                        class="sidebar-item {{ request()->routeIs('product.*') || request()->routeIs('product.review.*') ? 'active' : '' }}">
-                        <a data-bs-toggle="collapse" class="sidebar-link" href="#productMenu" role="button"
-                            aria-expanded="{{ request()->routeIs('product.*') || request()->routeIs('product.review.*') ? 'true' : 'false' }}"
-                            aria-controls="productMenu">
-                            <i class="align-middle" data-feather="package"></i> <span
-                                class="align-middle">Product</span>
-                        </a>
-                        <ul id="productMenu"
-                            class="sidebar-dropdown list-unstyled collapse {{ request()->routeIs('product.*') || request()->routeIs('product.review.*') ? 'show' : '' }}">
-                            <li class="sidebar-item {{ request()->routeIs('product.manage') ? 'active' : '' }}">
-                                <a class="sidebar-link" href="{{ route('product.manage') }}">
-                                    <i class="align-middle" data-feather="shopping-bag"></i> <span
-                                        class="align-middle">Manage Product</span>
-                                </a>
-                            </li>
-                            <li class="sidebar-item {{ request()->routeIs('product.review.manage') ? 'active' : '' }}">
-                                <a class="sidebar-link" href="{{ route('product.review.manage') }}">
-                                    <i class="align-middle" data-feather="star"></i> <span class="align-middle">Manage
-                                        Review</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="sidebar-item {{ request()->routeIs('productattribute.*') ? 'active' : '' }}">
-                        <a data-bs-toggle="collapse" class="sidebar-link" href="#productAttributeMenu" role="button"
-                            aria-expanded="{{ request()->routeIs('productattribute.*') ? 'true' : 'false' }}"
-                            aria-controls="productAttributeMenu">
-                            <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Product
-                                Attribute</span>
-                        </a>
-                        <ul id="productAttributeMenu"
-                            class="sidebar-dropdown list-unstyled collapse {{ request()->routeIs('productattribute.*') ? 'show' : '' }}">
-                            <li
-                                class="sidebar-item {{ request()->routeIs('productattribute.create') ? 'active' : '' }}">
-                                <a class="sidebar-link" href="{{ route('productattribute.create') }}">
-                                    <i class="align-middle" data-feather="plus"></i> <span class="align-middle">Create
-                                        Product Attribute</span>
-                                </a>
-                            </li>
-                            <li
-                                class="sidebar-item {{ request()->routeIs('productattribute.manage') ? 'active' : '' }}">
-                                <a class="sidebar-link" href="{{ route('productattribute.manage') }}">
-                                    <i class="align-middle" data-feather="list"></i> <span class="align-middle">Manage
-                                        Product Attribute</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="sidebar-item {{ request()->routeIs('discount.*') ? 'active' : '' }}">
-                        <a data-bs-toggle="collapse" class="sidebar-link" href="#discountMenu" role="button"
-                            aria-expanded="{{ request()->routeIs('discount.*') ? 'true' : 'false' }}"
-                            aria-controls="discountMenu">
-                            <i class="align-middle" data-feather="tag"></i> <span class="align-middle">Discount</span>
-                        </a>
-                        <ul id="discountMenu"
-                            class="sidebar-dropdown list-unstyled collapse {{ request()->routeIs('discount.*') ? 'show' : '' }}">
-                            <li class="sidebar-item {{ request()->routeIs('discount.create') ? 'active' : '' }}">
-                                <a class="sidebar-link" href="{{ route('discount.create') }}">
-                                    <i class="align-middle" data-feather="plus"></i> <span class="align-middle">Create
-                                        Discount</span>
-                                </a>
-                            </li>
-                            <li class="sidebar-item {{ request()->routeIs('discount.manage') ? 'active' : '' }}">
-                                <a class="sidebar-link" href="{{ route('discount.manage') }}">
-                                    <i class="align-middle" data-feather="list"></i> <span class="align-middle">Manage
-                                        Discount</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="sidebar-item {{ request()->routeIs('payment.*') ? 'active' : '' }}">
-                        <a data-bs-toggle="collapse" class="sidebar-link" href="#paymentMenu" role="button"
-                            aria-expanded="{{ request()->routeIs('payment.*') ? 'true' : 'false' }}"
-                            aria-controls="paymentMenu">
-                            <i class="align-middle" data-feather="credit-card"></i> <span
-                                class="align-middle">Payment</span>
-                        </a>
-                        <ul id="paymentMenu"
-                            class="sidebar-dropdown list-unstyled collapse {{ request()->routeIs('payment.*') ? 'show' : '' }}">
-                            <li class="sidebar-item {{ request()->routeIs('payment.create') ? 'active' : '' }}">
-                                <a class="sidebar-link" href="{{ route('payment.create') }}">
-                                    <i class="align-middle" data-feather="plus"></i> <span class="align-middle">Create
-                                        Payment</span>
-                                </a>
-                            </li>
-                            <li class="sidebar-item {{ request()->routeIs('payment.manage') ? 'active' : '' }}">
-                                <a class="sidebar-link" href="{{ route('payment.manage') }}">
-                                    <i class="align-middle" data-feather="list"></i> <span class="align-middle">Manage
-                                        Payment</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li
-                        class="sidebar-item {{ request()->routeIs('admin.cart.history') || request()->routeIs('admin.order.history') ? 'active' : '' }}">
-                        <a data-bs-toggle="collapse" class="sidebar-link" href="#historyMenu" role="button"
-                            aria-expanded="{{ request()->routeIs('admin.cart.history') || request()->routeIs('admin.order.history') ? 'true' : 'false' }}"
-                            aria-controls="historyMenu">
-                            <i class="align-middle" data-feather="clock"></i> <span class="align-middle">History</span>
-                        </a>
-                        <ul id="historyMenu"
-                            class="sidebar-dropdown list-unstyled collapse {{ request()->routeIs('admin.cart.history') || request()->routeIs('admin.order.history') ? 'show' : '' }}">
-                            <li class="sidebar-item {{ request()->routeIs('admin.cart.history') ? 'active' : '' }}">
-                                <a class="sidebar-link" href="{{ route('admin.cart.history') }}">
-                                    <i class="align-middle" data-feather="shopping-cart"></i> <span
-                                        class="align-middle">Cart</span>
-                                </a>
-                            </li>
-                            <li class="sidebar-item {{ request()->routeIs('admin.order.history') ? 'active' : '' }}">
-                                <a class="sidebar-link" href="{{ route('admin.order.history') }}">
+                            <li class="sidebar-item {{ request()->routeIs('artist.product.manage') ? 'active' : '' }}">
+                                <a class="sidebar-link" href="{{ route('artist.product.manage') }}">
                                     <i class="align-middle" data-feather="list"></i> <span
-                                        class="align-middle">Order</span>
+                                        class="align-middle">Manage</span>
                                 </a>
                             </li>
                         </ul>
                     </li>
 
-
-                    <li class="sidebar-item {{ request()->routeIs('admin.settings') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('admin.settings') }}">
-                            <i class="align-middle" data-feather="user"></i> <span class="align-middle">Settings</span>
+                    <li class="sidebar-item {{ request()->routeIs('store.*') ? 'active' : '' }}">
+                        <a data-bs-toggle="collapse" class="sidebar-link" href="#storeMenu" role="button"
+                            aria-expanded="{{ request()->routeIs('store.*') ? 'true' : 'false' }}"
+                            aria-controls="storeMenu">
+                            <i class="align-middle" data-feather="grid"></i> <span class="align-middle">Store</span>
+                        </a>
+                        <ul id="storeMenu"
+                            class="sidebar-dropdown list-unstyled collapse {{ request()->routeIs('store.*') ? 'show' : '' }}">
+                            <li class="sidebar-item {{ request()->routeIs('artist.store') ? 'active' : '' }}">
+                                <a class="sidebar-link" href="{{ route('artist.store') }}">
+                                    <i class="align-middle" data-feather="plus"></i> <span
+                                        class="align-middle">Create</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item {{ request()->routeIs('artist.store.manage') ? 'active' : '' }}">
+                                <a class="sidebar-link" href="{{ route('artist.store.manage') }}">
+                                    <i class="align-middle" data-feather="list"></i> <span
+                                        class="align-middle">Manage</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item {{ request()->routeIs('artist.order.history') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('artist.order.history') }}">
+                            <i class="align-middle" data-feather="clock"></i> <span class="align-middle">Order History</span>
                         </a>
                     </li>
                 </ul>
@@ -415,7 +290,7 @@
                 <div class="container-fluid p-0">
 
 
-                    @yield('admin_layout')
+                    @yield('artist_layout')
 
                 </div>
             </main>

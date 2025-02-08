@@ -1,7 +1,7 @@
 @extends('admin.layouts.layout')
 @section('admin_page_title')
-Dashboard - Admin Pannel
+Create - Discount Pannel
 @endsection
 @section('admin_layout')
-    <h3>Admin Dashboard</h3>
+    <h3>Create Discount Page</h3>
 @endsection
