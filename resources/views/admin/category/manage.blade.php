@@ -47,4 +47,5 @@ Manage - Category Panel
             </div>
         </div>
     </div>
-</div>@endsection
+</div>
+@endsection
