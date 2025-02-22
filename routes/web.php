@@ -14,6 +14,8 @@ use App\Http\Controllers\Artist\ArtistStoreController;
 
 use App\Http\Controllers\Customer\CustomerMainController;
 
+use App\Http\Controllers\MasterCategoryController;
+
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -61,6 +63,13 @@ Route::middleware(['auth', 'verified', 'rolemanager:admin'])->group(function () 
         Route::controller(PaymentController::class)->group(function(){
             Route::get('/payment/add', 'index')->name('payment.create');
             Route::get('/payment/manage', 'manage')->name('payment.manage');
+        });
+
+        Route::controller(MasterCategoryController::class)->group(function(){
+            Route::post('/store/category', 'storecat')->name('store.cat');
+            Route::get('/category/{id}', 'showcat')->name('show.cat');
+            Route::put('/category/update/{id}', 'updatecat')->name('update.cat');
+            Route::delete('/category/delete/{id}', 'deletecat')->name('delete.cat');
         });
     });
 });
