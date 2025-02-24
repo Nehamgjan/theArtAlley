@@ -96,6 +96,7 @@ Route::middleware(['auth', 'verified', 'rolemanager:artist'])->group(function ()
 
         Route::controller(ArtistProductController::class)->group(function(){
             Route::get('/product/create', 'index')->name('artist.product');
+            Route::post('/product/store', 'storeproduct')->name('vendor.product.store');
             Route::get('/product/manage', 'manage')->name('artist.product.manage');
         });
 
